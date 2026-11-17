@@ -6,31 +6,32 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
     />
-    <meta name="theme-color" content="#1E4A2B" />
+    <meta name="theme-color" content="#FFF8EC" />
     <meta name="color-scheme" content="light" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Huerta del Día" />
+    <meta name="apple-mobile-web-app-title" content="Panxa Roja" />
     <meta
       name="description"
-      content="La Huerta del Día · Fruta y verdura local de Mallorca, de la tierra a tu casa. Para casa y para restaurantes. Demo con datos ficticios."
+      content="Ca’n Panxa Roja · Fruta y verdura local de Mallorca, de la tierra a tu casa. Para casa y para restaurantes."
     />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
     <link
       rel="preload"
       as="image"
-      href="./img/cabecera-800.webp"
-      imagesrcset="./img/cabecera-800.webp 800w, ./img/cabecera-1600.webp 1600w"
-      imagesizes="(min-width: 1024px) 1200px, 100vw"
+      href="./img/mascota-pie-360.webp"
+      imagesrcset="./img/mascota-pie-360.webp 408w, ./img/mascota-pie-720.webp 816w"
+      imagesizes="(min-width: 1024px) 400px, 200px"
     />
-    <title>La Huerta del Día</title>
+    <title>Ca’n Panxa Roja</title>
     <style>
-      /* Pantalla de arranque: se pinta antes de que cargue JavaScript, como el splash nativo de Android. */
+      /* Pantalla de arranque: se pinta antes de que cargue JavaScript, como el splash nativo de Android.
+         Crema, como la tienda y la entrada (guía de marca), con la mascota de pie. */
       html.is-booting,
       html.is-booting body {
-        background: #1e4a2b;
+        background: #fff8ec;
         overflow: hidden;
       }
       #splash {
@@ -39,13 +40,15 @@
         z-index: 1000;
         display: grid;
         place-items: center;
-        background: #1e4a2b;
-        color: #faf5ea;
+        background: #fff8ec;
+        color: #23492d;
         transition: opacity 0.42s ease, visibility 0.42s;
       }
       #splash .splash-mark {
-        width: 112px;
-        height: 112px;
+        width: 168px;
+        height: auto;
+        transform-origin: 50% 100%;
+        filter: drop-shadow(0 10px 14px rgba(28, 38, 29, 0.22));
         animation: splash-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
       }
       #splash .splash-word {
@@ -60,18 +63,19 @@
       }
       #splash .splash-name {
         margin: 0;
-        font: 400 32px/1 'Instrument Serif', Georgia, serif;
-        letter-spacing: 0.005em;
+        font: 800 34px/1 'Panxa Display', system-ui, sans-serif;
+        letter-spacing: -0.015em;
       }
       #splash .splash-name em {
-        color: #f2a28f;
+        font-style: normal;
+        color: #e74732;
       }
       #splash .splash-tag {
         margin: 10px 0 0;
-        font: 500 13px/1.3 'DM Sans Variable', system-ui, sans-serif;
+        font: 600 13px/1.3 'Panxa Text', system-ui, sans-serif;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: rgba(250, 245, 234, 0.72);
+        color: #4e5a4c;
       }
       #splash.is-ready .splash-word {
         opacity: 1;
@@ -101,7 +105,7 @@
         }
         html.is-booting,
         html.is-booting body {
-          background: #faf5ea;
+          background: #fff8ec;
           overflow: auto;
         }
       }
@@ -113,24 +117,35 @@
         }
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-DFOhdiga.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-_RcF5fii.css">
+    <script type="module" crossorigin src="./assets/index-BiCtDvaD.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CIdw-AgP.css">
   </head>
   <body>
     <div id="splash" aria-hidden="true">
-      <svg class="splash-mark" viewBox="0 0 112 112" role="presentation">
-        <circle cx="56" cy="56" r="56" fill="#FAF5EA" />
-        <circle cx="56" cy="62" r="28" fill="#C8392B" />
-        <path d="M56 36c-3.6-8.6-10.6-12.4-17.6-12.2 1.8 8.6 8.8 13.8 17.6 12.2Z" fill="#4E8A3E" />
-        <path d="M56 36c3.4-7.2 10.2-10.6 17.2-9.2-1.8 7.4-8.6 11-17.2 9.2Z" fill="#4E8A3E" />
-        <path d="M56 37.5V27" stroke="#1E4A2B" stroke-width="4" stroke-linecap="round" />
-      </svg>
+      <img class="splash-mark" src="./img/mascota-pie-360.webp" alt="" width="408" height="360" />
       <div class="splash-word">
-        <p class="splash-name">La Huerta <em>del Día</em></p>
+        <p class="splash-name">Ca’n Panxa <em>Roja</em></p>
         <p class="splash-tag">De la tierra a tu casa</p>
       </div>
     </div>
+    <script>
+      // Idioma antes de cargar la app (mismo criterio que src/i18n/index.js): el lema del arranque y el lang.
+      (function () {
+        var lang = null;
+        try { lang = localStorage.getItem('panxa:idioma'); } catch (e) {}
+        if (!lang) {
+          var h = window.__HUERTA__;
+          var cuenta = h && h.sesion && h.sesion.cuenta;
+          var prefs = navigator.languages || [navigator.language];
+          lang = cuenta && cuenta.idioma ? cuenta.idioma : prefs.some(function (l) { return /^ca\b/i.test(l || ''); }) ? 'ca' : 'es';
+        }
+        if (lang === 'ca') {
+          document.documentElement.lang = 'ca-ES';
+          document.querySelector('#splash .splash-tag').textContent = 'De la terra a ca teva';
+        }
+      })();
+    </script>
     <div id="root"></div>
-    <noscript>Activa JavaScript para usar la demo de La Huerta del Día.</noscript>
+    <noscript>Activa JavaScript para usar Ca’n Panxa Roja. · Activa JavaScript per utilitzar Ca’n Panxa Roja.</noscript>
   </body>
 </html>
