@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es" class="is-booting">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <meta name="theme-color" content="#1E4A2B" />
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Huerta del Día" />
+    <meta
+      name="description"
+      content="La Huerta del Día · Fruta y verdura local de Mallorca, de la tierra a tu casa. Para casa y para restaurantes. Demo con datos ficticios."
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link
+      rel="preload"
+      as="image"
+      href="./img/cabecera-800.webp"
+      imagesrcset="./img/cabecera-800.webp 800w, ./img/cabecera-1600.webp 1600w"
+      imagesizes="(min-width: 1024px) 1200px, 100vw"
+    />
+    <title>La Huerta del Día</title>
+    <style>
+      /* Pantalla de arranque: se pinta antes de que cargue JavaScript, como el splash nativo de Android. */
+      html.is-booting,
+      html.is-booting body {
+        background: #1e4a2b;
+        overflow: hidden;
+      }
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: grid;
+        place-items: center;
+        background: #1e4a2b;
+        color: #faf5ea;
+        transition: opacity 0.42s ease, visibility 0.42s;
+      }
+      #splash .splash-mark {
+        width: 112px;
+        height: 112px;
+        animation: splash-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      #splash .splash-word {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+        text-align: center;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      #splash .splash-name {
+        margin: 0;
+        font: 400 32px/1 'Instrument Serif', Georgia, serif;
+        letter-spacing: 0.005em;
+      }
+      #splash .splash-name em {
+        color: #f2a28f;
+      }
+      #splash .splash-tag {
+        margin: 10px 0 0;
+        font: 500 13px/1.3 'DM Sans Variable', system-ui, sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(250, 245, 234, 0.72);
+      }
+      #splash.is-ready .splash-word {
+        opacity: 1;
+        transform: none;
+      }
+      #splash.is-leaving {
+        opacity: 0;
+        visibility: hidden;
+      }
+      #splash.is-leaving .splash-mark {
+        transform: scale(1.18);
+        transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @keyframes splash-in {
+        from {
+          opacity: 0;
+          transform: scale(0.82);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (min-width: 1024px) {
+        #splash {
+          display: none;
+        }
+        html.is-booting,
+        html.is-booting body {
+          background: #faf5ea;
+          overflow: auto;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #splash,
+        #splash * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-BdLh_TDZ.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CeAhbV0Z.css">
+  </head>
+  <body>
+    <div id="splash" aria-hidden="true">
+      <svg class="splash-mark" viewBox="0 0 112 112" role="presentation">
+        <circle cx="56" cy="56" r="56" fill="#FAF5EA" />
+        <circle cx="56" cy="62" r="28" fill="#C8392B" />
+        <path d="M56 36c-3.6-8.6-10.6-12.4-17.6-12.2 1.8 8.6 8.8 13.8 17.6 12.2Z" fill="#4E8A3E" />
+        <path d="M56 36c3.4-7.2 10.2-10.6 17.2-9.2-1.8 7.4-8.6 11-17.2 9.2Z" fill="#4E8A3E" />
+        <path d="M56 37.5V27" stroke="#1E4A2B" stroke-width="4" stroke-linecap="round" />
+      </svg>
+      <div class="splash-word">
+        <p class="splash-name">La Huerta <em>del Día</em></p>
+        <p class="splash-tag">De la tierra a tu casa</p>
+      </div>
+    </div>
+    <div id="root"></div>
+    <noscript>Activa JavaScript para usar la demo de La Huerta del Día.</noscript>
+  </body>
+</html>
